@@ -1,0 +1,35 @@
+{
+    "extensionName": {
+      "message": "Hoverable",
+      "description": ""
+    },
+    "extensionDescription": {
+      "message": "Display popup on hover for any div",
+      "description": "Display popup on hover for any div"
+    },
+    "stopButtonText": {
+        "message": "Stop Hoverable Extension",
+        "description": ""
+      },
+      "startButtonText": {
+        "message": "Start Hoverable Extension",
+        "description": ""
+      },
+      "runningMessage": {
+        "message": "Extension is currently running",
+        "description": ""
+      },
+      "stoppedMessage": {
+        "message": "Extension is currently stopped",
+        "description": ""
+      },
+      "wantToContribute": {
+        "message": "Want to contribute or raise an issue ? Visit our <u>GitHub page</u>",
+        "description": ""
+      },
+      "contactUs": {
+        "message": "Contact Us <br/><br/>",
+        "description": ""
+      }
+  }
+  

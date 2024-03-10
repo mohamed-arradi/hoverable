@@ -1,0 +1,35 @@
+{
+    "extensionName": {
+      "message": "Hoverable",
+      "description": ""
+    },
+    "extensionDescription": {
+        "message": "Affichez une fenêtre contextuelle au survol de n'importe quel div",
+        "description": "Affichez une fenêtre contextuelle au survol de n'importe quel div"
+      },      
+    "stopButtonText": {
+        "message": "Arrêter l'extension Hoverable",
+        "description": ""
+      },
+      "startButtonText": {
+        "message": "Démarrer l'extension Hoverable",
+        "description": ""
+      },
+      "runningMessage": {
+        "message": "L'extension est actuellement active",
+        "description": ""
+      },
+      "stoppedMessage": {
+        "message": "L'extension est actuellement arrêtée",
+        "description": ""
+      },
+      "wantToContribute": {
+        "message": "Want to contribute or raise an issue ? Visit our <u>GitHub page</u>",
+        "description": ""
+      },
+      "contactUs": {
+        "message": "Contactez Nous <br/><br/>",
+        "description": ""
+      }
+  }
+  
