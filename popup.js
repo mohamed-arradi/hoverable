@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   let isExtensionRunning;
-
   const messageTextContribute =  chrome.i18n.getMessage('wantToContribute');
   const messageContribute = document.getElementById('wantToContribute');
   messageContribute.style.color = '#FFFFFF';
@@ -26,7 +25,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function toggleExtensionState() {
     isExtensionRunning = !isExtensionRunning;
-    console.log(isExtensionRunning)
     updateButton();
 
     chrome.storage.local.set({ isExtensionRunning: isExtensionRunning });
@@ -44,3 +42,5 @@ document.addEventListener('DOMContentLoaded', function () {
     updateButton();
   });
 });
+
+

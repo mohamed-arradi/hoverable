@@ -1,5 +1,4 @@
 let hoverTimeout;
-let previousHoveredContent;
 let clickTimeout;
 let popupElement;
 let isExtensionRunning = false;
@@ -13,10 +12,9 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       removePopup();
     }
   } else if (request.action === 'startExtension') {
-    updateExtensionState()
+    updateExtensionState();
   }
 });
-
 
 // Function to update the extension state based on the stored value
 function updateExtensionState() {
@@ -27,45 +25,48 @@ function updateExtensionState() {
 
 // Read the initial state and set up the interval to check for updates
 updateExtensionState();
+
 const checkInterval = setInterval(updateExtensionState, 1000);
 
-document.addEventListener('mouseover', function (event) {
-  if (!isExtensionRunning) {
-    return;
-  }
+function initializeContentScript() {
+  document.addEventListener('mouseover', function (event) {
+    if (!isExtensionRunning) {
+      return;
+    }
 
-  const targetDiv = findTargetDiv(event.target);
+    const targetDiv = findTargetDiv(event.target);
 
-  if (targetDiv) {
+    if (targetDiv) {
+      clearTimeout(hoverTimeout);
+
+      hoverTimeout = setTimeout(function () {
+        const hoveredContent = targetDiv.innerText;
+        createPopup(hoveredContent, event.pageX, event.pageY);
+      }, 1000);
+    }
+  });
+
+  document.addEventListener('mouseout', function () {
     clearTimeout(hoverTimeout);
+  });
 
-    hoverTimeout = setTimeout(function () {
-      const hoveredContent = targetDiv.innerText;
-      createPopup(hoveredContent, event.pageX, event.pageY);
-    }, 1000);
-  }
-});
+  document.addEventListener('mousedown', function (event) {
+    const targetDiv = findTargetDiv(event.target);
 
-document.addEventListener('mouseout', function () {
-  clearTimeout(hoverTimeout);
-});
+    if (targetDiv) {
+      clearTimeout(clickTimeout);
 
-document.addEventListener('mousedown', function (event) {
-  const targetDiv = findTargetDiv(event.target);
+      clickTimeout = setTimeout(function () {
+        const clickedContent = targetDiv.innerText;
+        createPopup(clickedContent, event.pageX, event.pageY);
+      }, 1000);
+    }
+  });
 
-  if (targetDiv) {
+  document.addEventListener('mouseup', function () {
     clearTimeout(clickTimeout);
-
-    clickTimeout = setTimeout(function () {
-      const clickedContent = targetDiv.innerText;
-      createPopup(clickedContent, event.pageX, event.pageY);
-    }, 1000);
-  }
-});
-
-document.addEventListener('mouseup', function () {
-  clearTimeout(clickTimeout);
-});
+  });
+}
 
 function findTargetDiv(element) {
   while (element) {
@@ -81,8 +82,6 @@ function createPopup(content, x, y) {
   if (popupElement) {
     return;
   }
-
-  previousHoveredContent = content; // Update previousHoveredContent only when creating a popup
 
   popupElement = document.createElement('div');
   popupElement.id = 'popup-content';
@@ -112,6 +111,10 @@ function createPopup(content, x, y) {
 
   const contentElement = document.createElement('div');
   contentElement.innerHTML = content;
+  contentElement.style.color = "#000000";
+  contentElement.style.whiteSpace = 'normal';
+  contentElement.style.wordWrap = 'break-word';
+  contentElement.style.maxWidth = '100%';
   contentElement.style.paddingRight = '20px';
   popupElement.appendChild(contentElement);
 
@@ -124,3 +127,13 @@ function removePopup() {
     popupElement = null;
   }
 }
+
+initializeContentScript();
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+  if (request.action === 'toggleExtension') {
+    isExtensionRunning = request.isRunning;
+    // Call the function to initialize or re-initialize the content script
+    initializeContentScript();
+  }
+});

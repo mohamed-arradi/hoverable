@@ -5,7 +5,7 @@
   "description": "__MSG_extensionDescription__",
   "permissions": ["activeTab", "storage"],
   "background": {
-    "scripts": ["background.js"]
+    "service_worker": "background.js"
   },
   "content_scripts": [
     {
@@ -16,8 +16,8 @@
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "48": "/assets/Icon.png",
-      "16": "/assets/Icon16.png",
+      "48": "/assets/Icon.jpeg",
+      "16": "/assets/Icon16.jpeg",
       "128": "/assets/Icon128.jpeg"
     }
   },
