@@ -18,7 +18,7 @@ Hoverable is a browser extension that transforms the way you interact with text 
 ## Installation
 
 - [Install from Mozilla Add-ons]([Extension Download](https://addons.mozilla.org/en-GB/firefox/addon/hoverable/)) <!-- Replace with the actual link to your extension on Mozilla Add-ons -->
-- [Install from Chrome Web Store] <!-- Replace with the actual link to your extension on Chrome Web Store -->
+- [Install from Chrome Web Store] (https://chromewebstore.google.com/detail/hoverable/molkinpbbkebpnkkckgmdbepkgidhgek?hl=en-GB&utm_source=ext_sidebar)<!-- Replace with the actual link to your extension on Chrome Web Store -->
 
 ## Usage
 
