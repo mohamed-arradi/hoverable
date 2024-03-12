@@ -1,5 +1,5 @@
 
-# Hoverable - Elevate Your Browsing Experience
+# Hoverable - Make every text hoverable
 
 ![Hoverable Icon](/assets/Icon.jpeg) <!-- Replace with the link to your extension icon -->
 
