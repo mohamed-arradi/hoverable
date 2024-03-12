@@ -16,7 +16,6 @@ function clearExistingPopups() {
 function resetState() {
   hoveredContent = '';
   mouseCoordinates = { x: 0, y: 0 };
-  // Add any other state variables you need to reset
 }
 
 function updateMouseCoordinates(event) {
@@ -94,7 +93,6 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       sendResponse({ isContentScriptInjected: true });
       initializeExtension()
       break;
-    // Additional cases can be added as needed
   }
 });
 
