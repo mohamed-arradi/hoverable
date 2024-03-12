@@ -13,8 +13,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     }
   } else if (request.action === 'startExtension') {
     updateExtensionState();
+  } else if(request.action === 'stopExtension') {
+    clearTimeout(hoverTimeout);
+    clearTimeout(clickTimeout);
+    removePopup();
   }
 });
+
 
 // Function to update the extension state based on the stored value
 function updateExtensionState() {

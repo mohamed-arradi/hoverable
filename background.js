@@ -9,7 +9,8 @@ function stopExtension() {
 }
 
 function clearExistingPopups() {
-  // Your logic to remove or hide popups goes here
+  chrome.runtime.sendMessage({ action: 'stopExtension' }, function(response) {
+  });
 }
 
 function resetState() {
@@ -47,15 +48,15 @@ function initializeExtension() {
   chrome.storage.local.get('isExtensionRunning', function (result) {
     isExtensionRunning = result.isExtensionRunning !== undefined ? result.isExtensionRunning : true;
     chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      if (tabs[0]) {
-        chrome.tabs.sendMessage(tabs[0].id, { action: 'toggleExtension', isRunning: isExtensionRunning });
-      }
+      chrome.runtime.sendMessage({ action: 'toggleExtension', isRunning: isExtensionRunning }, function(response) {
+      });
     });
   });
 }
 
 function handleTabCreated() {
-  chrome.runtime.sendMessage({ action: 'startExtension' });
+ chrome.runtime.sendMessage({ action: 'startExtension' }, function(response) {
+});
 }
 
 // Event Listeners
@@ -91,6 +92,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       break;
     case 'checkContentScript':
       sendResponse({ isContentScriptInjected: true });
+      initializeExtension()
       break;
     // Additional cases can be added as needed
   }
